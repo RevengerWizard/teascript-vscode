@@ -1,0 +1,416 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Teascript",
+	"scopeName": "source.tea",
+	"patterns": [
+		{
+			"match": "\\{",
+			"name": "punctuation.definition.block.begin.tea"
+		},
+		{
+			"match": "\\}",
+			"name": "punctuation.definition.block.end.tea"
+		},
+		{
+			"match": "\\(",
+			"name": "punctuation.definition.group.begin.tea"
+		},
+		{
+			"match": "\\)",
+			"name": "punctuation.definition.group.end.tea"
+		},
+		{
+			"match": "\\[",
+			"name": "punctuation.definition.array.begin.tea"
+		},
+		{
+			"match": "\\]",
+			"name": "punctuation.definition.array.end.tea"
+		},
+		{
+			"match": "\\b(true|false|nil)\\b",
+			"name": "constant.language.tea"
+		},
+		{
+			"match": "(?<![\\w\\d.])0[bB][0-1]+(?![eE.0-9])",
+			"name": "constant.numeric.integer.binary.tea"
+		},
+		{
+			"match": "(?<![\\w\\d.])0[cC][0-7]+(?![eE.0-9])",
+			"name": "constant.numeric.integer.octal.tea"
+		},
+		{
+			"match": "(?<![\\w\\d.])0[xX][0-9A-Fa-f]+(?![eE.0-9])",
+			"name": "constant.numeric.integer.hexadecimal.tea"
+		},
+		{
+			"match": "(?<![\\w\\d.])\\d+(\\.\\d+)?([eE]-?\\d*)?",
+			"name": "constant.numeric.float.tea"
+		},
+		{
+			"match": "(?<![\\w\\d.])\\d+(?![eE.0-9])",
+			"name": "constant.numeric.integer.tea"
+		},
+		{
+			"match": "\\b(this)\\b",
+			"name": "variable.language.this.tea"
+		},
+		{
+			"match": "\\b(super)\\b",
+			"name": "variable.language.super.tea"
+		},
+		{
+			"match": "\\A(#!).*$\\n?",
+			"name": "comment.line.shebang.tea",
+			"captures": {
+				"1": {
+					"name": "comment.line.shebang.tea"
+				}
+			}
+		},
+		{
+			"begin": "\\b(function)\\b(?![,:])",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.tea"
+				}
+			},
+			"end": "(?<=[\\)\\-{}\\[\\]\"'])",
+			"name": "meta.function.tea",
+			"patterns": [
+				{
+					"begin": "(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.parameters.begin.tea"
+						}
+					},
+					"end": "(\\))|(?=[\\-\\.{}\\[\\]\"'])",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.parameters.finish.tea"
+						}
+					},
+					"name": "meta.parameter.tea",
+					"patterns": [
+						{
+							"match": "[a-zA-Z_][a-zA-Z0-9_]*",
+							"name": "variable.parameter.function.tea"
+						},
+						{
+							"match": ",",
+							"name": "punctuation.separator.arguments.tea"
+						}
+					]
+				},
+				{
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b\\s*(?=:)",
+					"name": "entity.name.class.tea"
+				},
+				{
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+					"name": "entity.name.function.tea"
+				}
+			]
+		},
+		{
+			"include": "#code"
+		}
+	],
+	"repository": {
+		"keyword": {
+			"patterns": [
+				{
+					"match": "\\b(class|import|from|as|break|const|new|continue|else|for|function|if|in|return|static|var|while|do|switch|case|default|export)\\b",
+					"name": "keyword.control.tea"
+				},
+				{
+					"match": "\\b(not|and|or|is|\\!)\\b",
+					"name": "keyword.operator.tea"
+				},
+				{
+					"match": "\\+|-|%|\\*",
+					"name": "keyword.operator.tea"
+				},
+				{
+					"match": "\\~|\\||&|\\^|>>|<<",
+					"name": "keyword.operator.tea"
+				},
+				{
+					"match": "\\+\\+|\\--",
+					"name": "keyword.operator.tea"
+				},
+				{
+					"match": "==|!=|<=|>=|<|>",
+					"name": "keyword.operator.tea"
+				},
+				{
+					"match": "\\+=|\\-=|\\*=|\\/=|%=|=|\\*\\*=|&=|\\|=|\\^=|=>",
+					"name": "keyword.operator.tea"
+				},
+				{
+					"match": "\\.{2}(?![.])",
+					"name": "keyword.operator.range.tea"
+				},
+				{
+					"match": "\\.{3}",
+					"name": "keyword.operator.range.tea"
+				}
+			]
+		},
+		"names": {
+			"patterns": [
+				{
+					"match": "\\b([A-Z][[[:alnum:]]_]*)\\b",
+					"name": "entity.name.type.tea"
+				},
+				{
+					"match": "\\b([[:alpha:]][[[:alnum:]]_]*)\\s*\\(",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.tea"
+						}
+					}
+				},
+				{
+					"match": "\\b([[:alpha:]][[[:alnum:]]_]*)\\b",
+					"name": "variable.tea"
+				}
+			]
+		},
+		"string": {
+			"patterns": [
+				{
+					"begin": "\"\"\"",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.tea"
+						}
+					},
+					"end": "\"\"\"",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.tea"
+						}
+					},
+					"name": "string.quoted.triple.double.tea",
+					"patterns": [
+						{
+							"include": "#stringEscape"
+						}
+					]
+				},
+				{
+					"begin": "'''",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.tea"
+						}
+					},
+					"end": "'''",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.tea"
+						}
+					},
+					"name": "string.quoted.triple.single.tea",
+					"patterns": [
+						{
+							"include": "#stringEscape"
+						}
+					]
+				},
+				{
+					"begin": "```",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.tea"
+						}
+					},
+					"end": "```",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.tea"
+						}
+					},
+					"name": "string.quoted.triple.backtick.tea",
+					"patterns": [
+						{
+							"include": "#stringEscape"
+						}
+					]
+				},
+				{
+					"begin": "\"",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.tea"
+						}
+					},
+					"end": "\"[ \\t]*|(?=\\n)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.tea"
+						}
+					},
+					"name": "string.quoted.double.tea",
+					"patterns": [
+						{
+							"include": "#stringEscape"
+						},
+						{
+							"include": "#stringInterpolated"
+						}
+					]
+				},
+				{
+					"begin": "'",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.tea"
+						}
+					},
+					"end": "'[ \\t]*|(?=\\n)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.tea"
+						}
+					},
+					"name": "string.quoted.single.tea",
+					"patterns": [
+						{
+							"include": "#stringEscape"
+						},
+						{
+							"include": "#stringInterpolated"
+						}
+					]
+				},
+				{
+					"begin": "`",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.tea"
+						}
+					},
+					"end": "`[ \\t]*|(?=\\n)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.tea"
+						}
+					},
+					"name": "string.quoted.backtick.tea",
+					"patterns": [
+						{
+							"include": "#stringEscape"
+						},
+						{
+							"include": "#stringInterpolated"
+						}
+					]
+				}
+			]
+		},
+		"stringEscape": {
+			"patterns": [
+				{
+					"match": "\\\\[abfnrtv\\\\\"'`\\n]",
+					"name": "constant.character.escape.tea"
+				},
+				{
+					"match": "\\\\x[0-9A-Fa-f][0-9A-Fa-f]",
+					"name": "constant.character.escape.byte.tea"
+				},
+				{
+					"match": "\\\\u[0-9A-Fa-f]{4}",
+					"name": "constant.character.escape.unicode.tea"
+				},
+				{
+					"match": "\\\\U[0-9A-Fa-f]{8}",
+					"name": "constant.character.escape.unicode.tea"
+				},
+				{
+					"match": "\\\\.",
+					"name": "invalid.illegal.character.escape.tea"
+				}
+			]
+		},
+		"stringInterpolated": {
+			"patterns": [
+				{
+					"begin": "\\$\\{",
+					"end": "\\}",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.template-expression.begin.tea"
+						}
+					},
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.template-expression.end.tea"
+						}
+					},
+					"contentName": "meta.embedded.line.tea",
+					"patterns": [
+						{
+							"include": "#code"
+						}
+					]
+				}
+			]
+		},
+		"comment": {
+			"patterns": [
+				{
+					"begin": "\\/\\/",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.tea"
+						}
+					},
+					"end": "\\n",
+					"name": "comment.line.double-dash.tea"
+				},
+				{
+					"begin": "/\\*(?!/)",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.begin.tea"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.end.tea"
+						}
+					},
+					"name": "comment.block.tea",
+					"patterns": [
+						{
+							"include": "#comment"
+						}
+					]
+				}
+			]
+		},
+		"code": {
+			"patterns": [
+				{
+					"include": "#keyword"
+				},
+				{
+					"include": "#names"
+				},
+				{
+					"include": "#string"
+				},
+				{
+					"include": "#stringEscape"
+				},
+				{
+					"include": "#comment"
+				}
+			]
+		}
+	}
+}

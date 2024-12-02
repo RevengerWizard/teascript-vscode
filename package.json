@@ -1,0 +1,45 @@
+{
+    "name": "teascript",
+    "displayName": "%displayName%",
+    "description": "%description%",
+    "version": "0.0.0",
+    "publisher": "Revenger Wizard",
+    "repository": "",
+    "engines": {
+        "vscode": "^1.22.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "teascript",
+                "aliases": ["Teascript", "teascript"],
+                "extensions": [".tea"],
+                "configuration": "./teascript-language-configuration.json"
+            },
+            {
+                "id": "teascript-markdown-injection"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "teascript",
+                "scopeName": "source.tea",
+                "path": "./syntaxes/teascript.tmlanguage.json"
+            },
+            {
+                "language": "teascript-markdown-injection",
+                "scopeName": "markdown.tea.codeblock",
+                "path": "./syntaxes/teascript-markdown-injection.json",
+                "injectTo": [
+                    "text.html.markdown"
+                ],
+                "embeddedLanguages": {
+                    "meta.embedded.block.tea": "tea"
+                }
+            }
+        ]
+    }
+}
