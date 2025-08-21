@@ -52,8 +52,8 @@
 			"name": "constant.numeric.integer.tea"
 		},
 		{
-			"match": "\\b(this)\\b",
-			"name": "variable.language.this.tea"
+			"match": "\\b(self)\\b",
+			"name": "variable.language.self.tea"
 		},
 		{
 			"match": "\\b(super)\\b",
@@ -121,7 +121,7 @@
 		"keyword": {
 			"patterns": [
 				{
-					"match": "\\b(class|import|from|as|break|const|new|continue|else|for|function|if|in|return|static|var|while|do|switch|case|default|export)\\b",
+					"match": "\\b(class|import|from|as|break|const|new|continue|else|for|function|if|in|return|static|operator|var|while|do|switch|case|default|export)\\b",
 					"name": "keyword.control.tea"
 				},
 				{
